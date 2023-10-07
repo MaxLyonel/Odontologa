@@ -6,25 +6,25 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // configuracion de la base de datos
 import { TypeOrmModule } from '@nestjs/typeorm';
-import dataBaseConfig from './config/database.config';
+import dataBaseConfig from '../database/config/database.config';
 
 // Modulos importados
-import { UsersModule } from './entities/users/users.module';
-import { PersonsModule } from './entities/persons/persons.module';
-import { PatientsModule } from './entities/patients/patients.module';
-import { EmployeesModule } from './entities/employees/employees.module';
-import { EmployeeTypesModule } from './entities/employee_types/employee_types.module';
-import { TreatmentStatesModule } from './entities/treatment_states/treatment_states.module';
-import { TreatmentTypesModule } from './entities/treatment_types/treatment_types.module';
-import { StageTypesModule } from './entities/stage_types/stage_types.module';
-import { ScheludeStatesModule } from './entities/schelude_states/schelude_states.module';
-import { ScheludesModule } from './entities/scheludes/scheludes.module';
-import { TreatmentsModule } from './entities/treatments/treatments.module';
-import { MedicalHistoriesModule } from './entities/medical_histories/medical_histories.module';
-import { RolesModule } from './entities/roles/roles.module';
-import { PermissionsModule } from './entities/permissions/permissions.module';
-import { UsersRolesModule } from './entities/users_roles/users_roles.module';
-import { RolesPermissionsModule } from './entities/roles_permissions/roles_permissions.module';
+import { UsersModule } from './users/users.module';
+import { PersonsModule } from './persons/persons.module';
+import { PatientsModule } from './patients/patients.module';
+import { EmployeesModule } from './employees/employees.module';
+import { EmployeeTypesModule } from './employee_types/employee_types.module';
+import { TreatmentStatesModule } from './treatment_states/treatment_states.module';
+import { TreatmentTypesModule } from './treatment_types/treatment_types.module';
+import { StageTypesModule } from './stage_types/stage_types.module';
+import { ScheludeStatesModule } from './schelude_states/schelude_states.module';
+import { ScheludesModule } from './scheludes/scheludes.module';
+import { TreatmentsModule } from './treatments/treatments.module';
+import { MedicalHistoriesModule } from './medical_histories/medical_histories.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { UsersRolesModule } from './users_roles/users_roles.module';
+import { RolesPermissionsModule } from './roles_permissions/roles_permissions.module';
 @Module({
   imports: [
     ConfigModule.forRoot({

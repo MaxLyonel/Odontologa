@@ -1,7 +1,7 @@
 import { Column, Double, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Employee } from "src/entities/employees/entities/employee.entity";
-import { StageType } from "src/entities/stage_types/entities/stage_type.entity";
-import { MedicalHistory } from "src/entities/medical_histories/entities/medical_history.entity";
+import { Employee } from "../../employees/entities/employee.entity";
+import { StageType } from "../../stage_types/entities/stage_type.entity";
+import { MedicalHistory } from "../../medical_histories/entities/medical_history.entity";
 
 @Entity()
 export class Treatment {

@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Person } from "src/entities/persons/entities/person.entity";
+import { Person } from "../../persons/entities/person.entity";
 
 @Entity()
 export class Patient {
@@ -8,9 +8,6 @@ export class Patient {
 
     @Column()
     registerDate: Date
-
-    // @Column()
-    // allergies: Array<string>
 
     @Column()
     bloodType: string

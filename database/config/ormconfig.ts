@@ -2,8 +2,8 @@
 import { ConfigModule } from "@nestjs/config";
 import { DataSource } from "typeorm";
 import { DataSourceOptions } from "typeorm";
-// Es una configuracion de fuente de datos que se pasa a una
-// nueva instancia DataSource
+import { SeederOptions } from "typeorm-extension";
+import InitSeeder  from '../seeds/init.seeder';
 
 ConfigModule.forRoot({
     envFilePath: '.env'
@@ -19,13 +19,14 @@ const options = {
     synchronize: false,
     migrationsRun: true,
     autoLoadEntities: true,
-    entities: [__dirname + '../../**/*.entity.ts'],
+    entities: [__dirname + '/../../**/*.entity.ts'],
     migrationsTableName: 'migrations',
-    migrations: [__dirname + '/../migrations/*.ts']
+    migrations: [__dirname + '/../migrations/*.ts'],
+    seeds: [InitSeeder]
 };
 
 const dataSource = new DataSource(
-    options as DataSourceOptions
+    options as DataSourceOptions & SeederOptions
 );
 
 dataSource.initialize()

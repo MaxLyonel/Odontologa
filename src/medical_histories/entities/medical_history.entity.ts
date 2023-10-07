@@ -1,7 +1,7 @@
 import { Column, Double, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Patient } from "src/entities/patients/entities/patient.entity";
-import { TreatmentType } from "src/entities/treatment_types/entities/treatment_type.entity";
-import { TreatmentState } from "src/entities/treatment_states/entities/treatment_state.entity";
+import { Patient } from "../../patients/entities/patient.entity";
+import { TreatmentType } from "../../treatment_types/entities/treatment_type.entity";
+import { TreatmentState } from "../../treatment_states/entities/treatment_state.entity";
 
 @Entity()
 export class MedicalHistory {
