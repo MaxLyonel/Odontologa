@@ -9,18 +9,21 @@ export class PersonSeeder implements Seeder {
         dataSource: DataSource,
         factoryManager: SeederFactoryManager
     ): Promise<any> {
-        const repository = dataSource.getRepository(Person)
-        await repository.insert([
-            {
-                firstName: "Leonel",
-                secondName: "Maximo",
-                lastName: "Vargas",
-                mothersLastName: "Ramirez",
-                birthDate: "1994-02-22",
-                direction: "Villa el carmen 248",
-                identityCard: "9101918",
-                gender: "M"
-            }
-        ]);
+        // const repository = dataSource.getRepository(Person)
+        // await repository.insert([
+        //     {
+        //         firstName: "Leonel",
+        //         secondName: "Maximo",
+        //         lastName: "Vargas",
+        //         mothersLastName: "Ramirez",
+        //         birthDate: "1994-02-22",
+        //         direction: "Villa el carmen 248",
+        //         identityCard: "9101918",
+        //         gender: "M"
+        //     }
+        // ]);
+
+        const personFactory = await factoryManager.get(Person)
+        await personFactory.saveMany(30)
     }
 }

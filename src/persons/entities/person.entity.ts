@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "../../users_roles/users/entities/user.entity";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Person {
@@ -28,4 +29,7 @@ export class Person {
 
     @Column()
     gender: string
+
+    @OneToOne(() => User, (user) => user.id)
+    user: number
 }

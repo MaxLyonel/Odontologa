@@ -22,7 +22,8 @@ const options = {
     entities: [__dirname + '/../../**/*.entity.ts'],
     migrationsTableName: 'migrations',
     migrations: [__dirname + '/../migrations/*.ts'],
-    seeds: [InitSeeder]
+    seeds: [InitSeeder],
+    factories: [__dirname + '/../**/*.factory.ts']
 };
 
 const dataSource = new DataSource(
