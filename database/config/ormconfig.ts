@@ -19,7 +19,7 @@ const options = {
     synchronize: false,
     migrationsRun: true,
     autoLoadEntities: true,
-    entities: [__dirname + '/../../**/*.entity.ts'],
+    entities: [__dirname + '/../../**/*.entity.{js,ts}'],
     migrationsTableName: 'migrations',
     migrations: [__dirname + '/../migrations/*.ts'],
     seeds: [InitSeeder],
