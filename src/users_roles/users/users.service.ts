@@ -119,4 +119,25 @@ export class UserService {
       }
     ]
   }
+
+  async findUser(username: string, password: string) {
+    const user = await dataSource
+      .getRepository(User)
+      .createQueryBuilder("user")
+      .where("user.username = :username", {username})
+      .where("user.password = :password", {password})
+      .getOne()
+    return user
+  }
+
+  async activeUser(id: number) {
+    const user = await dataSource
+      .getRepository(User)
+      .createQueryBuilder("user")
+      .where("user.id = :id", { id })
+      .where("user.active = :active", { active: true})
+      .getOne()
+    if(user) return true
+    else return false
+  }
 }

@@ -15,8 +15,7 @@ import { AgendaAppointmentModule } from './agenda_appointment/agenda_appointment
 import { CustomersModule } from './customers/customers.module';
 import { UsersRolesModule } from './users_roles/users_roles.module';
 import { EmployeesModule } from './employees/employees.module';
-import { User } from './users_roles/users/entities/user.entity';
-import { Person } from './persons/entities/person.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -43,6 +42,7 @@ import { Person } from './persons/entities/person.entity';
     ClinicalHistoryModule,
     AgendaAppointmentModule,
     CustomersModule,
+    AuthModule,
   ], // con esto cargamos las variables de entorno
   controllers: [ AppController ],
   providers: [ AppService ], // los proveedores que seran instanciados por el inyector de Nest y que pueden compartirse al menos en este modulo

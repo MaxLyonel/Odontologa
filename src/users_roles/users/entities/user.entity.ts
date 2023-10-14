@@ -15,6 +15,9 @@ export class User {
     @Column()
     active: boolean
 
+    // @Column()
+    // token: string
+
     @OneToOne(() => Person, (person) => person.id)
     @JoinColumn()
     person: number
