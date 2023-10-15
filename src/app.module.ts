@@ -6,24 +6,20 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // configuracion de la base de datos
 import { TypeOrmModule } from '@nestjs/typeorm';
-import dataBaseConfig from '../database/config/database.config';
 
 // Modulos importados
 import { PersonsModule } from './persons/persons.module';
 import { ClinicalHistoryModule } from './clinical_history/clinical_history.module';
 import { AgendaAppointmentModule } from './agenda_appointment/agenda_appointment.module';
 import { CustomersModule } from './customers/customers.module';
-import { UsersRolesModule } from './users_roles/users_roles.module';
 import { EmployeesModule } from './employees/employees.module';
 import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [ dataBaseConfig ]
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ ConfigModule ],
       inject: [ ConfigService ],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
@@ -32,21 +28,20 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DATABASE_USERNAME'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
-        entities: [],
+        entities: ['dist/**/*.entity.{js,ts}'],
         synchronize: true,
       }),
     }),
     PersonsModule,
     EmployeesModule,
-    UsersRolesModule,
     ClinicalHistoryModule,
     AgendaAppointmentModule,
     CustomersModule,
     AuthModule,
-  ], // con esto cargamos las variables de entorno
+  ],
   controllers: [ AppController ],
-  providers: [ AppService ], // los proveedores que seran instanciados por el inyector de Nest y que pueden compartirse al menos en este modulo
+  providers: [ AppService ],
 })
 export class AppModule {
-  constructor(private configService: ConfigService){}
+  // constructor(private dataSource: DataSource, private configService: ConfigService){}
 }

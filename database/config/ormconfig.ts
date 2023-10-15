@@ -3,7 +3,8 @@ import { ConfigModule } from "@nestjs/config";
 import { DataSource } from "typeorm";
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
-import InitSeeder  from '../seeds/init.seeder';
+// import InitSeeder  from 'dist/database/seeds/init.seeder'
+// import  InitSeeder  from 'database/seeds/init.seeder'
 
 ConfigModule.forRoot({
     envFilePath: '.env'
@@ -19,11 +20,15 @@ const options = {
     synchronize: false,
     migrationsRun: true,
     autoLoadEntities: true,
-    entities: [__dirname + '/../../**/*.entity.{js,ts}'],
+    // entities: [__dirname + '/../../**/*.entity.{js,ts}'],
+    entities: ['dist/**/*.entity.{js,ts}'],
     migrationsTableName: 'migrations',
-    migrations: [__dirname + '/../migrations/*.ts'],
-    seeds: [InitSeeder],
-    factories: [__dirname + '/../**/*.factory.ts']
+    // migrations: [__dirname + '/../migrations/*.ts'],
+    migrations: ['dist/**/migrations/*.js'],
+    // seeds: [InitSeeder],
+    seeds: ['dist/**/init.seeder.js'],
+    // factories: [__dirname + '/../**/*.factory.ts']
+    factories: ['dist/**/*.factory.{js,ts}']
 };
 
 const dataSource = new DataSource(

@@ -1,5 +1,7 @@
-import { Person } from "../../../persons/entities/person.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "src/users_roles/roles/entities/role.entity";
+import { Person } from "src/persons/entities/person.entity";
+
 
 @Entity()
 export class User {
@@ -15,10 +17,14 @@ export class User {
     @Column()
     active: boolean
 
-    // @Column()
-    // token: string
+    @Column()
+    token: string
 
     @OneToOne(() => Person, (person) => person.id)
     @JoinColumn()
     person: number
+
+    @ManyToMany(() => Role)
+    @JoinTable()
+    role: Role[]
 }

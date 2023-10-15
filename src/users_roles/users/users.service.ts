@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import dataSource from '../../../database/config/ormconfig';
 import { User } from './entities/user.entity';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  constructor(private dataSource: DataSource) {}
   async create(createUserDto: CreateUserDto) {
-    const newUser = await dataSource
+    const newUser = await this.dataSource
       .createQueryBuilder()
       .insert()
       .into(User)
@@ -30,7 +31,7 @@ export class UserService {
   }
 
   async findAll() {
-    const users = await dataSource
+    const users = await this.dataSource
       .getRepository(User)
       .createQueryBuilder("user")
       .leftJoinAndSelect("user.person", "person")
@@ -52,7 +53,7 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    const user = await dataSource
+    const user = await this.dataSource
       .getRepository(User)
       .createQueryBuilder("user")
       .leftJoinAndSelect("user.person", "person")
@@ -75,7 +76,7 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const updateUser = await dataSource
+    const updateUser = await this.dataSource
       .createQueryBuilder()
       .update(User)
       .set(updateUserDto)
@@ -98,7 +99,7 @@ export class UserService {
   }
 
   async remove(id: number) {
-    const deleteUser = await dataSource
+    const deleteUser = await this.dataSource
       .createQueryBuilder()
       .delete()
       .from(User)
@@ -121,17 +122,19 @@ export class UserService {
   }
 
   async findUser(username: string, password: string) {
-    const user = await dataSource
+    const user = await this.dataSource
       .getRepository(User)
       .createQueryBuilder("user")
+      .leftJoinAndSelect("user.role", "role")
       .where("user.username = :username", {username})
       .where("user.password = :password", {password})
       .getOne()
+    console.log(user)
     return user
   }
 
   async activeUser(id: number) {
-    const user = await dataSource
+    const user = await this.dataSource
       .getRepository(User)
       .createQueryBuilder("user")
       .where("user.id = :id", { id })

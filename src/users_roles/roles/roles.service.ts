@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import dataSource from 'database/config/ormconfig';
+// import dataSource from 'database/config/ormconfig';
+// import { Role } from '../../../src/users_roles/roles/entities/role.entity';
+import { DataSource } from 'typeorm';
 import { Role } from './entities/role.entity';
 
 @Injectable()
 export class RolesService {
+  constructor(private dataSource: DataSource) {}
   async create(createRoleDto: CreateRoleDto) {
-    const newRole = await dataSource
+    const newRole = await this.dataSource
       .createQueryBuilder()
       .insert()
       .into(Role)
@@ -30,7 +33,7 @@ export class RolesService {
   }
 
   async findAll() {
-    const roles = await dataSource
+    const roles = await this.dataSource
       .getRepository(Role)
       .createQueryBuilder("role")
       .getMany()
@@ -51,7 +54,7 @@ export class RolesService {
   }
 
   async findOne(id: number) {
-    const role = await dataSource
+    const role = await this.dataSource
       .getRepository(Role)
       .createQueryBuilder("role")
       .where("role.id = :id", { id })
@@ -73,7 +76,7 @@ export class RolesService {
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
-    const updateRole = await dataSource
+    const updateRole = await this.dataSource
       .createQueryBuilder()
       .update(Role)
       .set(updateRoleDto)
@@ -96,7 +99,7 @@ export class RolesService {
   }
 
   async remove(id: number) {
-    const deleteRole = await dataSource
+    const deleteRole = await this.dataSource
       .createQueryBuilder()
       .delete()
       .from(Role)

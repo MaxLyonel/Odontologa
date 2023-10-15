@@ -39,6 +39,7 @@ export default setSeederFactory(User, async (fake) => {
     user.password = fake.internet.password()
     user.active = fake.datatype.boolean()
     user.person = randomPersonId
+    user.token = 'algo'
     currentIndex++
 
     return user

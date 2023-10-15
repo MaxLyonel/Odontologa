@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePermissionDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
-import dataSource from 'database/config/ormconfig';
 import { Permission } from './entities/permission.entity';
-import { PersistedEntityNotFoundError } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class PermissionsService {
+  constructor(private dataSource: DataSource) {}
   async create(createPermissionDto: CreatePermissionDto) {
-    const newPermission = await dataSource
+    const newPermission = await this.dataSource
       .createQueryBuilder()
       .insert()
       .into(Permission)
@@ -31,7 +31,7 @@ export class PermissionsService {
   }
 
   async findAll() {
-    const permissions = await dataSource
+    const permissions = await this.dataSource
       .getRepository(Permission)
       .createQueryBuilder("permission")
       .getMany()
@@ -52,7 +52,7 @@ export class PermissionsService {
   }
 
   async findOne(id: number) {
-    const permission = await dataSource
+    const permission = await this.dataSource
       .getRepository(Permission)
       .createQueryBuilder("permission")
       .where("permission.id = :id", { id })
@@ -74,7 +74,7 @@ export class PermissionsService {
   }
 
   async update(id: number, updatePermissionDto: UpdatePermissionDto) {
-    const updatePermission = await dataSource
+    const updatePermission = await this.dataSource
       .createQueryBuilder()
       .update(Permission)
       .set(updatePermissionDto)
@@ -97,7 +97,7 @@ export class PermissionsService {
   }
 
   async remove(id: number) {
-    const deletePermission = await dataSource
+    const deletePermission = await this.dataSource
       .createQueryBuilder()
       .delete()
       .from(Permission)

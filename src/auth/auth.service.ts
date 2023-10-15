@@ -27,6 +27,7 @@ export class AuthService {
 
     const payload = {
       id: user.id,
+      roles: user.role,
       expiresIn: 60
     }
     const jwtToken = this.jwtService.sign(payload)

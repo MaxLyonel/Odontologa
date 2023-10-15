@@ -1,7 +1,6 @@
 import { DataSource } from "typeorm";
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { Permission } from "../../src/users_roles/permissions/entities/permission.entity"
-
+import { Permission } from "src/users_roles/permissions/entities/permission.entity";
 export default class PermissionSeeder implements Seeder {
     public async run(
         dataSource: DataSource,
