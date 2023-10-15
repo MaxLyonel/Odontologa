@@ -1,4 +1,4 @@
-import { Column, Double, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Double, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Employee } from "../../../employees/employee/entities/employee.entity";
 import { StageType } from "../../stage_types/entities/stage_type.entity";
 import { MedicalHistory } from "../../medical_histories/entities/medical_history.entity";
@@ -31,5 +31,14 @@ export class Treatment {
 
     @ManyToOne(() => MedicalHistory, (medicalHistory) => medicalHistory.id)
     medicalHistory: number
+
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
+
+    @DeleteDateColumn()
+    deletedAt: Date
 
 }

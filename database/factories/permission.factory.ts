@@ -1,8 +1,11 @@
 import { setSeederFactory } from "typeorm-extension";
-import { Permission } from "../../src/users_roles/permissions/entities/permission.entity"
+import { Permission } from "src/users_roles/permissions/entities/permission.entity";
 
 const PERMISSION = [
-    'ALL'
+    'VER',
+    'ACTUALIZAR',
+    'CREAR',
+    'ELIMINAR'
 ]
 
 export default setSeederFactory(Permission, (fake) => {

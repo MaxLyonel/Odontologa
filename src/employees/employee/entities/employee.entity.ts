@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Person } from "../../../persons/entities/person.entity";
 import { EmployeeType } from "../../employee_types/entities/employee_type.entity";
 
@@ -11,7 +11,7 @@ export class Employee {
     position: string
 
     @Column()
-    dateOfHire: string
+    dateOfHire: Date
 
     @Column()
     licenceNumber: number
@@ -22,4 +22,13 @@ export class Employee {
 
     @ManyToOne(() => EmployeeType, (employeeType) => employeeType.id)
     employeType: number
+
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
+
+    @DeleteDateColumn()
+    deletedAt: Date
 }

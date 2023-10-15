@@ -1,5 +1,5 @@
-import { Role } from "../../src/users_roles/roles/entities/role.entity";
 import { setSeederFactory } from "typeorm-extension";
+import { Role } from "src/users_roles/roles/entities/role.entity";
 
 const ROL = [
     'ADMINISTRADOR',

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Employee } from "../../../employees/employee/entities/employee.entity";
 import { Treatment } from "../../../clinical_history/treatments/entities/treatment.entity";
 import { ScheludeState } from "../../schelude_states/entities/schelude_state.entity";
@@ -20,4 +20,12 @@ export class Schelude {
     @ManyToOne(() => ScheludeState, (scheludeState) => scheludeState.id)
     scheludeState: number
 
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
+
+    @DeleteDateColumn()
+    deletedAt: Date
 }

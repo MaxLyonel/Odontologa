@@ -1,5 +1,5 @@
 import { Permission } from "../../permissions/entities/permission.entity";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Role {
@@ -15,5 +15,14 @@ export class Role {
     @ManyToMany(() => Permission)
     @JoinTable()
     permission: Permission[]
+
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
+
+    @DeleteDateColumn()
+    deletedAt: Date
 }
 

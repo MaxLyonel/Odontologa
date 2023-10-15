@@ -1,26 +1,6 @@
 import { setSeederFactory } from "typeorm-extension";
-import { User } from "../../src/users_roles/users/entities/user.entity";
-import { Person } from "../../src/persons/entities/person.entity";
-import dataSource from "../../database/config/ormconfig";
-
-function shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-async function getAllAvailablePersonIds(): Promise<number[]> {
-    const personIds = await dataSource.getRepository(Person)
-                        .createQueryBuilder('person')
-                        .select('person.id')
-                        .getMany()
-
-    // Mezcla aleatoriamente las IDs de persona para evitar duplicados
-    const shuffledPersonIds = shuffleArray(personIds.map((person) => person.id));
-
-    return shuffledPersonIds;
-}
+import { User } from "src/users_roles/users/entities/user.entity";
+import { getAllAvailablePersonIds } from '../helpers/utilitarian'
 
 let availablePersonIds: number[] = [];
 let currentIndex = 0;
