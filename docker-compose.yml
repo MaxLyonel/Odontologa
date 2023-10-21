@@ -2,18 +2,22 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
+    container_name: database_postgres
     env_file:
        - .env
     environment:
-      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
     ports:
       - "5432:5432"
     networks:
       - network-app
 
   backend:
+    container_name: dental_clinic
     build: ./
     env_file:
       - .env

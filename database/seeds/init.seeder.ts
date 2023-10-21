@@ -10,7 +10,6 @@ import { StageTypeSeeder } from './stageType.seeder';
 import { TreatmentTypeSeeder } from './treatmentType.seeder';
 import { TreatmentStateSeeder } from './treatmentState.seeder';
 import { ScheludeStateSeeder } from './scheludeState.seeder';
-
 export default class InitSeeder implements Seeder {
     public async run(
         dataSource: DataSource,

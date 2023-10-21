@@ -2,8 +2,6 @@ import personFactory from "database/factories/person.factory";
 import { Employee } from "src/employees/employee/entities/employee.entity";
 import { DataSource } from "typeorm";
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-
-
 export class EmployeeSeeder implements Seeder {
     public async run(
         dataSource: DataSource,

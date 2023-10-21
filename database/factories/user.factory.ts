@@ -6,7 +6,7 @@ let availablePersonIds: number[] = [];
 let currentIndex = 0;
 
 export default setSeederFactory(User, async (fake) => {
-    const user = new User // Creame una instancia de la entidad User
+    const user = new User
 
     if (availablePersonIds.length === 0) {
         availablePersonIds = await getAllAvailablePersonIds();
