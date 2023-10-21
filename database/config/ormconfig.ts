@@ -12,7 +12,7 @@ ConfigModule.forRoot({
 
 const options = {
     type: 'postgres',
-    host: process.env.DATABASE_HOST || 'localhost',
+    host: process.env.DATABASE_HOST || 'postgres',
     port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
     username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
@@ -37,9 +37,11 @@ const dataSource = new DataSource(
 
 dataSource.initialize()
 .then(() => {
+    console.log(options)
     console.log("Base de datos inicializada")
 })
 .catch((err) => {
+    console.log(options)
     console.error("Base de dato no inicialidada", err)
 })
 

@@ -10,7 +10,7 @@ export class Employee {
     @Column()
     position: string
 
-    @Column()
+    @Column({ nullable: true})
     dateOfHire: Date
 
     @Column()
