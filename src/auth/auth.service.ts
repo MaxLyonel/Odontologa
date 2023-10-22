@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from '../../src/users_roles/users/users.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/users_roles/users/entities/user.entity';
+import { UpdateUserDto } from 'src/users_roles/users/dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +34,9 @@ export class AuthService {
     }
     const jwtToken = this.jwtService.sign(payload)
     const authenticatedUser = {...user, jwtToken}
+    const updateUser: UpdateUserDto = await this.userService.findOne(user.id)
+    updateUser.token = jwtToken
+    this.userService.update(user.id, {...updateUser})
     return [
       {
         error: false,

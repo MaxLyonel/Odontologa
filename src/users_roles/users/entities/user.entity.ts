@@ -14,10 +14,10 @@ export class User {
     @Column()
     password: string
 
-    @Column()
+    @Column({default: false, nullable: true})
     active: boolean
 
-    @Column()
+    @Column({nullable: true})
     token: string
 
     @OneToOne(() => Person, (person) => person.id)

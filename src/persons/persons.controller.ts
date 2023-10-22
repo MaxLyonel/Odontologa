@@ -18,8 +18,17 @@ export class PersonsController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: string) {
-    return this.personsService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: string) {
+    const person = await this.personsService.findOne(+id);
+    return person ? {
+        error: false,
+        message: "Persona encontrada",
+        data: [ person ]
+    } : {
+        error: true,
+        message: "No se pudo obtener a la persona",
+        data: []
+    }
   }
 
   @Patch(':id')

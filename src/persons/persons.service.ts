@@ -58,20 +58,7 @@ export class PersonsService {
       .createQueryBuilder("person")
       .where("person.id = :id", { id })
       .getOne()
-    if(person) return [
-      {
-        error: false,
-        message: "Persona encontrada",
-        data: [ person ]
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se pudo obtener a la persona",
-        data: []
-      }
-    ]
+    return person
   }
 
   async update(id: number, updatePersonDto: UpdatePersonDto) {
@@ -119,4 +106,5 @@ export class PersonsService {
       }
     ]
   }
+
 }

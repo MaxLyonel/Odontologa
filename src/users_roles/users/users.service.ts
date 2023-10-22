@@ -14,20 +14,7 @@ export class UserService {
       .into(User)
       .values(createUserDto)
       .execute()
-    if(newUser) return [
-      {
-        error: false,
-        message: "Usuario creado exitosamente",
-        data:  [ newUser ]
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se creo al usuario",
-        data: []
-      }
-    ]
+    return newUser
   }
 
   async findAll() {
@@ -36,43 +23,17 @@ export class UserService {
       .createQueryBuilder("user")
       .leftJoinAndSelect("user.person", "person")
       .getMany()
-    if(users) return [
-      {
-        error: false,
-        message: "Usuarios encontrados",
-        data: users
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se pudo obtener a los usuarios",
-        data: []
-      }
-    ]
+    return users
   }
 
   async findOne(id: number) {
-    const user = await this.dataSource
+    const user: UpdateUserDto = await this.dataSource
       .getRepository(User)
       .createQueryBuilder("user")
       .leftJoinAndSelect("user.person", "person")
       .where("user.id = :id", { id })
       .getOne()
-    if(user) return [
-      {
-        error: false,
-        message: "Usuario encontrado",
-        data: [ user ]
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se pudo obtener al usuario",
-        data: []
-      }
-    ]
+    return user
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -82,20 +43,7 @@ export class UserService {
       .set(updateUserDto)
       .where("id = :id", { id })
       .execute()
-    if(updateUser) return [
-      {
-        error: false,
-        message: "Usuario actualizado exitosamente",
-        data: [ updateUser ]
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se pudo actualizar al usuario",
-        data: []
-      }
-    ]
+    return updateUser
   }
 
   async remove(id: number) {
@@ -105,20 +53,7 @@ export class UserService {
       .from(User)
       .where("id = :id", { id })
       .execute()
-    if(deleteUser) return [
-      {
-        error: false,
-        message: "Usuario eliminado exitosamente!",
-        data: [ deleteUser ]
-      }
-    ]
-    else return [
-      {
-        error: true,
-        message: "No se pudo eliminar al usuario",
-        data: []
-      }
-    ]
+    return deleteUser
   }
 
   async findUser(username: string, password: string) {
@@ -129,7 +64,6 @@ export class UserService {
       .where("user.username = :username", {username})
       .where("user.password = :password", {password})
       .getOne()
-    console.log(user)
     return user
   }
 
@@ -142,5 +76,14 @@ export class UserService {
       .getOne()
     if(user) return true
     else return false
+  }
+
+  async findByPerson(id: number) {
+    const user = await this.dataSource
+      .getRepository(User)
+      .createQueryBuilder("user")
+      .where("user.person = :id", { id })
+      .getOne()
+    return user
   }
 }
